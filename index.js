@@ -107,10 +107,15 @@ handlers.ping = function (data,callback) {
 	// Callback a http status code, and a payload object
 	callback(200);
 };
-// Ping handler 
+// hello handler
 handlers.hello = function (data,callback) {
-	// Callback a http status code, and a payload object
-	callback(200,{"Greeting":"Hello World"});
+	// Callback a http status code, and a payload object. 
+	// Also check if query string param 'usr' is passed and respond accordingly
+	var msg = 'Greetings Visitor';
+	if (typeof(data.queryStringObject.usr) !== 'undefined') {
+		msg = 'Hello '+data.queryStringObject.usr;
+	}
+	callback(200,{"Message":msg});
 };
 
 // Not found handler 
